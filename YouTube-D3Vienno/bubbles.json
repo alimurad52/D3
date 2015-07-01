@@ -1,0 +1,14 @@
+{
+  "name": "Max",
+  "value": 100,
+  "children": [
+	{"name": "Joe", "value": 100},
+	{"name": "Alex", "value": 105},
+	{"name": "Paul", "value": 90},
+	{"name": "Song", "value": 78},
+	{"name": "Bill", "value": 50},
+	{"name": "Sam", "value": 125},
+	{"name": "Will", "value": 40},
+	{"name": "James", "value": 60}
+]
+}

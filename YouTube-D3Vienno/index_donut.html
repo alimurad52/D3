@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>D3 Tutorial </title>
+		<script src = 'http://d3js.org/d3.v3.min.js'></script>
+	</head>
+	
+	<body>
+	
+	
+	<script>
+	
+	var data = [10, 50, 80, 24, 8, 38]
+	var r = 200
+	var color = d3.scale.ordinal()
+						.range(['red', 'blue', 'orange', 'green', 'yellow', 'olive'])
+	
+	var canvas = d3.select("body").append("svg")
+				.attr("width", 800)
+				.attr("height", 800);
+				
+	var group = canvas.append("g")
+				.attr("transform", "translate(300, 300)");
+
+	var arc = d3.svg.arc()
+				.innerRadius(r-100)
+				.outerRadius(r)
+	
+	var pie = d3.layout.pie()
+				.value(function(d){return d})
+				
+	var arcs = group.selectAll('.arc')
+					.data(pie(data))
+					.enter()
+					.append('g')
+					.attr('class', 'arc')
+					
+	arcs.append('path')
+		.attr('d', arc)
+		.attr('fill', function(d){return color(d.data)})
+	
+	arcs.append('text')
+		.attr("transform", function(d){return "translate(" + arc.centroid(d) + ")";})
+		.attr('text-anchor', 'middle')
+		.attr('font-size', '2em')
+		.text(function(d){return d.data})
+	
+							
+	</script>
+	
+	
+	</body>
+
+</html>
