@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+
+        
+    </head>
+    <body>
+        <script type="text/javascript">
+            // Your beautiful D3 code will go here
+var w = 800;
+var h = 300;
+var barPadding = 2;
+
+var dataset = [5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+                11, 12, 15, 20, 18, 17, 16, 18, 23, 25];
+
+var svg = d3.select('body')
+	    .append('svg')
+	    .attr("width", w)
+	    .attr("height", h)
+	    
+var xScale = d3.scale.ordinal()
+			   .domain(d3.range(dataset.length))
+			   .rangeRoundBands([0, w], 0.05)
+			   
+var yScale = d3.scale.linear()
+			   .domain([0, d3.max(dataset)])
+			   .range([0, h]);
+
+var barChart = svg.selectAll('rect')
+		 .data(dataset)
+		 .enter()
+		 .append('rect')
+		 .attr('x', function(d, i){return xScale(i)})
+		 .attr('y', function(d){return h - yScale(d)})
+		 .attr('width', xScale.rangeBand())
+		 .attr('height', function(d){return yScale(d)})
+		 .attr('fill', 'teal')
+
+var barText = svg.selectAll('text')
+		 .data(dataset)
+		 .enter()
+		 .append('text')
+		 .text(function(d){return d})
+		 .attr('x', function(d, i){return xScale(i) + xScale.rangeBand() / 2
+;})
+		 .attr('y', function(d){return h - yScale(d) + 14})
+		 .attr('font-family', 'Arial')
+		 .attr('font-size', '12px')
+		 .attr('fill', 'white')
+		 .attr('text-anchor', 'middle')
+		 
+
+
+			   
+
+
+		
+
+
+        </script>
+    
+        
+    </body>
+</html>
+
+
+
+
+	

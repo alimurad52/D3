@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+
+        
+    </head>
+    <body>
+    
+    
+<script type="text/javascript">
+
+
+function draw(dataset){
+
+// Setting width and height 
+//var margin = {top: 20, right: 20, bottom: 20, left: 20}
+var w = 800// - margin.left - margin.rignt;
+var h = 500// - margin.top - margin.bottom;
+
+
+
+var svg = d3.select('body')
+	    .append('svg')
+	    .attr("width", w)// + margin.left + margin.right)
+	    .attr("height", h)// + margin.top + margin.bottom)
+	    
+	    
+// Append element 'g' for reference point for adding axes
+//svg.append('g')
+   //.attr('transform', 'translate(' + margin.left + ',' + margin.right + ')')
+
+// Ordinal X Scale -> Text
+var xScale = d3.scale.ordinal()
+			   .domain(dataset.map(function(d){return d.CountryName}))
+			   .rangeRoundBands([0, w], .1);
+
+// Linear Y scale 
+var yScale = d3.scale.linear()
+			   .domain([0, d3.max(dataset, function(d){return d.Indicator})])
+			   .range([h, 0])
+			   
+// X-Axis
+var xAxis = d3.svg.axis()
+			  .scale(xScale)
+			  .orient('bottom')
+
+
+// Y-Axis
+var yAxis = d3.svg.axis()
+			  .scale(yScale)
+			  .orient('left')
+			  .ticks(5)
+			   
+// X - Axis		   
+svg.append('g')
+   .attr('class', 'x axis') 
+   .attr('transform', 'translate(0,'+ h +')') 
+   .call(xAxis)
+ .selectAll('text')
+   .style('text-anchor', 'end')
+   .attr('dx', '-0.8em')
+   .attr('dy', '-0.55em')
+   .attr('transform', 'rotate(-90)')
+
+
+// Y - Axis
+svg.append('g')
+   .attr('class', 'y axis') // Assign "axis" class
+   .call(yAxis)
+ .append('text')
+   .attr('transform', 'rotate(-90)')
+   .attr('y', 6)
+   .attr('dy', '0.7em')
+   .style('text-anchor', 'end')
+   .text('Internet Users Per 100 People')
+
+var barChart = svg.selectAll('rect')
+		 .data(dataset)
+		 .enter()
+		 .append('rect')
+		 .attr('x', function(d){return xScale(d.CountryName)})
+		 .attr('y', function(d){return yScale(d.Indicator)})
+		 .attr('width', xScale.rangeBand())
+		 .attr('height', function(d){return h - yScale(d.Indicator)})
+		 .attr('fill', 'steelblue')
+
+
+   
+
+   
+   
+
+}
+
+d3.csv("internet_user.csv", draw);		 
+
+        </script>
+    
+        
+    </body>
+</html>
+
+
+
+
+	
