@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<head>
+	<title>Flask+SQL+D3 Bar Plot</title>
+    <!-- CSS ================================================== -->
+    <!-- Bootstrap 3-->
+    <link rel=stylesheet type=text/css href={{url_for('static',filename='css/bootstrap.min.css')}}>
+	<!-- Template Styles -->
+	<link rel=stylesheet type=text/css href={{url_for('static',filename='css/plot.css')}}>
+	<!-- Fonts -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+	<!-- Dropdown menu for Borough -->
+	<div>
+		<h3>NYC 311 Call Counts by Agency</h3>
+		<h6>
+			Data Source:
+			<a href="https://nycopendata.socrata.com/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9/data">NYC Open Data</a>
+		</h6>
+		<small>Date Range: January 1, 2016 to September 21, 2016</small>
+	    <div>
+			<small>
+	        This SQL powered interactive D3 barplot is based on
+	        <a href="http://www.datasciencebytes.com/bytes/2015/03/07/a-d3js-plot-powered-by-a-sql-database/">Frank Cleary's Tutorial</a>
+			</small>
+		</div>	
+	</div>
+	<div class="row">&nbsp;</div>
+	<p>
+		<!-- <label> represents a caption for an item in a user interface.-->
+		<label for="borough_select" style="display: inline-block; width: 85px; text-align: right">Borough = </label>
+		
+		<!-- <select> element represents a control that presents a menu of options.-->
+		<!-- onchange: Execute a JavaScript when a user changes the selected option of <select> element-->
+		<!-- onchange calls "update_url" function from "plot.js" -->
+		<select id="borough_select" onchange="update_url()"> 
+			<!-- <option> element is used to create a control representing an item within a <select> -->
+			<!-- option value: hardcoded based on database column "borough" values-->
+			<option value="MANHATTAN">Manhattan</option>
+			<option value="QUEENS">Queens</option>
+			<option value="BROOKLYN">Brooklyn</option>
+			<option value="BRONX">Bronx</option>
+			<option value="STATEN ISLAND">Staten Island</option>
+		</select>
+			
+	</p>
+	
+	<!-- Slider for Time -->
+	<p>
+		<label for="time" style="display: inline-block; align: left; width: 100px; text-align: right">
+			<!-- <span> tag is also used to group inline-elements in a document. -->
+			Time = <span id="pretty_time"></span>
+		</label>
+		<!-- <input> -->
+		<input type="range" id="time_slide" min="0" max="1440" style="width:850px" value="480">
+		
+	</p>
+	<p>
+		Drag slider or Click slider and use arrow keys to adjust time.
+	</p>
+	
+	
+	
+	<!-- JavaScripts: First D3 then other-->
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src={{ url_for('static',filename='js/jquery.js')}}></script>
+    <script src={{ url_for('static',filename='js/bootstrap.min.js')}}></script>
+	<script src={{ url_for('static',filename='js/plot.js')}}></script>
+	<!-- 
+    <script src={{ url_for('static',filename='js/plot.js')}}></script>
+	-->
+		
+	</div>
+		<h5>Backronyms</h5>
+		<dl class="dl-horizontal">
+		    <dt>DEP</dt>
+		    <dd>Department of Environmental Protection</dd>
+		    <dt>DOB</dt>
+		    <dd>Department of Buildings</dd>
+		    <dt>DOF</dt>
+		    <dd>Department of Finance</dd>
+		    <dt>DOHMH</dt>
+		    <dd>Department of Health and Mental Hygiene</dd>
+		    <dt>DOT</dt>
+		    <dd>Department of Transportation</dd>
+		    <dt>DPR</dt>
+		    <dd>Department of Parks and Recreation</dd>
+		    <dt>DSNY</dt>
+		    <dd>Department of Sanitation</dd>
+		    <dt>HPD</dt>
+		    <dd>Department of Housing Preservation and Development</dd>
+		    <dt>NYPD</dt>
+		    <dd>New York City Police Department</dd>
+		    <dt>TLC</dt>
+		    <dd>Taxi and Limousine Commission</dd>
+		</dl>
+	</div>
+		
+    </div>
+    <div class="row">&nbsp;</div> <!-- Row spacing -->
+    <div class="row">&nbsp;</div>
+    <!-- footer end -->
+    <div class="panel panel-default">
+    <div class="panel-footer">
+    <div class="subfooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 centered">
+                    <p>
+                        Code:
+                    </p>
+                    <h2>
+                        <a target="_blank" href="https://github.com/ankoorb/"><i class="fa fa-github"></i></a>
+                    </h2>
+                </div>
+                <div class="col-md-2 centered">
+                    <p>
+                        Contact:
+                    </p>
+                    <h2>
+                        <a href="mailto:ankooris@gmail.com"><i class="fa fa-envelope"></i></a>
+                        <a target="_blank" href="http://www.linkedin.com/in/ankoorb"><i class="fa fa-linkedin"></i></a>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+		
+</body>

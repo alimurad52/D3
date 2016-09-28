@@ -1,0 +1,35 @@
+body {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bar {
+  fill: orange;
+}
+
+.bar:hover {
+  fill: steelblue;
+}
+
+.tick {
+  width: 2px
+}
+
+.axis {
+  font: 12px sans-serif;
+  font-weight: normal;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2;
+  shape-rendering: auto;
+}
+
+.dl-horizontal {
+	font: 12px sans-serif;
+	font-weight: normal;
+}
